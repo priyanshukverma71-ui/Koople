@@ -1,0 +1,29 @@
+{
+  "name": "koople",
+  "version": "1.0.0",
+  "description": "KOOPLE — AI Image Generation Platform",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev:server": "npm.cmd --prefix server run dev",
+    "dev:client": "npm.cmd --prefix client run dev",
+    "build": "npm.cmd --prefix client run build",
+    "test:server": "npm.cmd --prefix server test",
+    "test:client": "npm.cmd --prefix client test -- --run",
+    "test": "npm.cmd --prefix server test && npm.cmd --prefix client test -- --run"
+  },
+  "keywords": [
+    "koople",
+    "ai",
+    "image-generation",
+    "gemini",
+    "imagen",
+    "react",
+    "express"
+  ],
+  "author": "KOOPLE Team",
+  "license": "UNLICENSED"
+}

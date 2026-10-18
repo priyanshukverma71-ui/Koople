@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: koople-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: koople
+    volumes:
+      - mongo-data:/data/db
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: koople-server
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      MONGODB_URI: mongodb://mongodb:27017/koople
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      JWT_SECRET: ${JWT_SECRET:-koople_default_jwt_secret_key_32chars}
+      FRONTEND_URL: http://localhost:5173
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo-data:
